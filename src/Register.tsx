@@ -1,16 +1,20 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from './UserContext';
 import axios from 'axios';
 
 const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const {setLoggedInUsername, setId} = useContext(UserContext);
 
   const register = async (e: any) => {
     e.preventDefault();
     try {
-      await axios.post('/register', {username: username, password: password});
+      const response = await axios.post('/register', {username: username, password: password});
+      setLoggedInUsername(username);
+      setId(response.data._id);
     } catch (error) {
-      alert(error.response.data.error);
+      alert('An error has occurred!');
     }
   };
 

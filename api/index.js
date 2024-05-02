@@ -31,7 +31,9 @@ app.post('/register', async (req, res) => {
     jsonwebtoken.sign({userId: createdUser._id}, jwtSecret, {}, (err, token) => { // Parameter order for .sign is .sign(payload, secretOrPrivateKey, options, callback)
       if (err) throw err;
       // Sending response as a cookie
-      res.cookie('token', token).status(201).json('Created');
+      res.cookie('token', token).status(201).json({
+        _id: createdUser._id,
+      });
     });
   } catch(err) {
     if (err.code === 11000) {
