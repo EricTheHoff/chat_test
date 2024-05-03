@@ -4,7 +4,6 @@ import RegisterAndLoginForm from "./RegisterAndLoginForm";
 
 const Routes = () => {
   const { loggedInUsername, id } = useContext(UserContext);
-  // console.log(loggedInUsername);
   
   if (loggedInUsername) { 
     return `Logged in as ${loggedInUsername}`
